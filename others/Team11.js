@@ -1,11 +1,11 @@
-let player = ['Quinton de Kock',' KL Rahul',' Deepak Hooda',' Marcus Stoinis',' Ayush Badoni',' Krunal Pandya',' Jason Holder',
+let player = [' Quinton de Kock',' KL Rahul',' Deepak Hooda',' Marcus Stoinis',' Ayush Badoni',' Krunal Pandya',' Jason Holder',
              ' Avesh Khan',' Dushmantha Chameera',' Mohsin Khan',' R Bishnoi',
              ' Venkatesh Iyer',' Ajinkya Rahane',' Shreyas Iyer ',' Nitish Rana',' Sam Billings ',' Andre Russell',' Rinku Singh',
              ' Sunil Narine',' Tim Southee',' Umesh Yadav',' Varun Chakravarty'];
 let ability = {'BAT':'BAT','WK':'WK','ALL':'ALL','BOW':'BOW'};
 let a = [
 {name: player[0],  team: 1,credits: 9.0,  skill: ability.WK},
-{name: player[1],  team: 1,credits: 10.0, skill: ability.BAT},{name: player[2],  team: 1, credits: 9.5, skill: ability.BAT},
+{name: player[1],  team: 1,credits: 10.0, skill: ability.WK},{name: player[2],  team: 1, credits: 9.5, skill: ability.BAT},
 {name: player[3],  team: 1,credits: 8.5,  skill: ability.BAT},{name: player[4],  team: 1, credits: 8.0, skill: ability.BAT},
 {name: player[5],  team: 1,credits: 8.5,  skill: ability.ALL},{name: player[6],  team: 1, credits: 8.5, skill: ability.ALL},
 
@@ -70,16 +70,28 @@ while(f<11)
     }
 }
   
-b.forEach(i => console.log(i));
-console.log('cap');
+let b1 = b.filter(i => i.skill === ability.WK);
+console.log(ability.WK);
+b1.forEach(i => console.log(i.name));
+let b2 = b.filter(i => i.skill === ability.BAT);
+console.log(ability.BAT);
+b2.forEach(i => console.log(i.name));
+let b3 = b.filter(i => i.skill === ability.ALL);
+console.log(ability.ALL);
+b3.forEach(i => console.log(i.name));
+let b4 = b.filter(i => i.skill === ability.BOW);
+console.log(ability.BOW);
+b4.forEach(i => console.log(i.name));
+
+console.log('CAPTAIN');
 let j=Math.floor(Math.random()*(b.length));
 let n= b[j];
-console.log(n);
-console.log('vc');
+console.log(n.name);
+console.log('VICE CAPTAIN');
 b.splice(j,1);
 let j1=Math.floor(Math.random()*(b.length));
 n= b[j1];
-console.log(n);
+console.log(n.name);
 
 
 
