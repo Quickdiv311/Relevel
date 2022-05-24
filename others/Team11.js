@@ -1,64 +1,87 @@
-  let a = [{"Name":"W Saha","Team":1,"Credits":9,"Skill":"WK"},{"Name":"S Gill","Team":1,"Credits":9,"Skill":"BAT"},{"Name":"M Wade","Team":1,"Credits":8,"Skill":"WK"},{"Name":"H Pandya","Team":1,"Credits":9,"Skill":"ALL"},{"Name":"D Miller","Team":1,"Credits":9,"Skill":"BAT"},{"Name":"R Tewatia","Team":1,"Credits":8.5,"Skill":"ALL"},{"Name":"R Khan","Team":1,"Credits":9.5,"Skill":"BOW"},{"Name":"A Joseph","Team":1,"Credits":8,"Skill":"BOW"},{"Name":"R S Kishore","Team":1,"Credits":8,"Skill":"BOW"},{"Name":"M Shami","Team":1,"Credits":9,"Skill":"BOW"},{"Name":"Y Dayal","Team":1,"Credits":8,"Skill":"BOW"},{"Name":"V Kohli","Team":2,"Credits":8.5,"Skill":"BAT"},{"Name":"F Du Plessis","Team":2,"Credits":9.5,"Skill":"BAT"},{"Name":"R Patidar","Team":2,"Credits":8.5,"Skill":"BAT"},{"Name":"M Lomror","Team":2,"Credits":8,"Skill":"BAT"},{"Name":"G Maxwell","Team":2,"Credits":9.5,"Skill":"ALL"},{"Name":"D Karthik","Team":2,"Credits":9,"Skill":"WK"},{"Name":"S Ahmed","Team":2,"Credits":8.5,"Skill":"ALL"},{"Name":"H Patel","Team":2,"Credits":9,"Skill":"BOW"},{"Name":"W Hasaranga","Team":2,"Credits":9.5,"Skill":"BOW"},{"Name":"M Siraj","Team":2,"Credits":8.5,"Skill":"BOW"},{"Name":"J Hazelwood","Team":2,"Credits":9,"Skill":"BOW"}]
-  let ability = {'BAT':'BAT','WK':'WK','ALL':'ALL','BOW':'BOW'};
+let a = [{"Name":"J Buttler","Team":1,"Credits":10.5,"Skill":"WK"},{"Name":"S Samson","Team":1,"Credits":9,"Skill":"WK"},{"Name":"D Padikkal","Team":1,"Credits":8.5,"Skill":"BAT"},{"Name":"Y Jaiswal","Team":1,"Credits":8.5,"Skill":"BAT"},{"Name":"R Ashwin","Team":1,"Credits":9,"Skill":"ALL"},{"Name":"R Parag","Team":1,"Credits":8,"Skill":"ALL"},{"Name":"S Hetmyer","Team":1,"Credits":8.5,"Skill":"BAT"},{"Name":"Y Chahal","Team":1,"Credits":9.5,"Skill":"BOW"},{"Name":"T Boult","Team":1,"Credits":8.5,"Skill":"BOW"},{"Name":"P Krishna","Team":1,"Credits":8.5,"Skill":"BOW"},{"Name":"O McCoy","Team":1,"Credits":8,"Skill":"BOW"},{"Name":"W Saha","Team":2,"Credits":9,"Skill":"WK"},{"Name":"M Wade","Team":2,"Credits":8,"Skill":"WK"},{"Name":"D Miller","Team":2,"Credits":9,"Skill":"BAT"},{"Name":"S Gill","Team":2,"Credits":9,"Skill":"BAT"},{"Name":"H Pandya","Team":2,"Credits":9.5,"Skill":"ALL"},{"Name":"R Tewatia","Team":2,"Credits":8,"Skill":"ALL"},{"Name":"R Khan","Team":2,"Credits":9.5,"Skill":"BOW"},{"Name":"M Shami","Team":2,"Credits":8.5,"Skill":"BOW"},{"Name":"A Joseph","Team":2,"Credits":8,"Skill":"BOW"},{"Name":"Y Dayal","Team":2,"Credits":8,"Skill":"BOW"},{"Name":"R S Kishore","Team":2,"Credits":8,"Skill":"BOW"}];
+let ability = {'BAT':'BAT','WK':'WK','ALL':'ALL','BOW':'BOW'};
+let total = 0;
+let playerCount=0;
+let index;
+let b =[];
+let teamCount = {1:0,2:0};
+let skillsCount = {'BAT':0,'WK':0,'ALL':0,'BOW':0};
 
-  let total = 0;
-  let t=0;
-  let f=0;
-  let i;
-  let i1;
-  let b =[];
-  let ot = {1:0,2:0};
-  let os = {'BAT':0,'WK':0,'ALL':0,'BOW':0};
-
-
-function prefilter(n,sk)
+  function selectPlayer(i)
   {
-    if((os[a[i1].Skill] < n) && (a[i1].Skill===sk) && ot[a[i1].Team] <7) 
+    teamCount[a[i].Team] +=1;
+    skillsCount[a[i].Skill] +=1;
+    total+=a[i].Credits;
+    b.push(a[i]);
+    a.splice(i,1);
+    playerCount++;
+  }
+
+  function rejectPlayer(i)
+  {
+    a.splice(i,1);
+  }
+
+  function preSelect(i,n,sk)
+  {
+    if((skillsCount[a[i].Skill] < n) && (a[i].Skill===sk) && teamCount[a[i].Team] <7 && total<=(100-a[i].Credits)) 
    {
-    ot[a[i1].Team] +=1;
-    os[a[i1].Skill] +=1;
-    t+=a[i1].Credits;
-    b.push(a[i1]);
-    a.splice(i1,1);
-    f++;
+    selectPlayer(i);
+    }
+    else
+    {
+      console.log("cannot pre select player `${i}`");
+    }
+  }  
+
+function prefilter(i,n,sk)
+  {
+    if((skillsCount[a[i].Skill] < n) && (a[i].Skill===sk) && teamCount[a[i].Team] <7 && total<=(100-a[i].Credits)) 
+   {
+    selectPlayer(i);
     }
   }
 
-function selectTeam(a,n1,n2,n3,n4)
+function selectTeam(a,...input)
 {
-n1 = n1<1 ? 1: n1;
-n2 = n2<3 ? 3: n2;
-n3 = n3<1 ? 1: n3;
-n4 = n4<3 ? 3: n4;
+input[0] = input[0]<1 || input[0]==undefined ? 1: input[0];
+input[1] = input[1]<3 || input[1]==undefined ? 3: input[1];
+input[2] = input[2]<1 || input[2]==undefined ? 1: input[2];
+input[3] = input[3]<3 || input[3]==undefined ? 3: input[3];
 
-if(n1+n2+n3+n4 <=11)
+if(input[0]+input[1]+input[2]+input[3] <=11)
 {
-while(f<(n1+n2+n3+n4))
+while(playerCount<(input[0]+input[1]+input[2]+input[3]))
 {
-  i1=Math.floor(Math.random()*(a.length));
+  index=Math.floor(Math.random()*(a.length));
 
-  prefilter(n1,'WK');
-  prefilter(n2,'BAT');
-  prefilter(n3,'ALL');
-  prefilter(n4,'BOW');
+  prefilter(index,input[0],'WK');
+  prefilter(index,input[1],'BAT');
+  prefilter(index,input[2],'ALL');
+  prefilter(index,input[3],'BOW');
 }
 
-while(f<11)
+while(playerCount<11)
 {
-    i=Math.floor(Math.random()*(a.length));
+    index=Math.floor(Math.random()*(a.length));
 
-    if(t<=(100-a[i].Credits) && ot[a[i].Team] <7)
+    if(total<=(100-a[index].Credits) && teamCount[a[index].Team] <7)
     {
-        ot[a[i].Team] +=1;
-        os[a[i].Skill] +=1;
-        t+=a[i].Credits;
-        b.push(a[i]);
-        a.splice(i,1);
-        f++;
+       selectPlayer(index);
     }
 }
-  
-let b1 = b.filter(i => i.Skill === ability.WK);
+
+printResult();
+}
+else
+{
+  console.log("Players more than 11");
+}
+}
+
+function printResult()
+{
+  let b1 = b.filter(i => i.Skill === ability.WK);
 console.log(ability.WK);
 b1.forEach(i => console.log(i.Name));
 let b2 = b.filter(i => i.Skill === ability.BAT);
@@ -82,11 +105,6 @@ let j1=Math.floor(Math.random()*(b.length));
 n= b[j1];
 console.log(n.Name);
 }
-else
-{
-  console.log("Players more than 11");
-}
-}
 
-selectTeam(a,1,4,1,3);
+selectTeam(a,2,4);
 
