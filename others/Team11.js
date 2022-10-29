@@ -81,17 +81,21 @@ else
 
 function printResult()
 {
-  let b1 = b.filter(i => i.Skill === ability.WK);
+let b1 = b.filter(i => i.Skill === ability.WK);
 console.log(ability.WK);
+b1.sort((a,b) => b.Credits - a.Credits);
 b1.forEach(i => console.log(i.Name));
 let b2 = b.filter(i => i.Skill === ability.BAT);
 console.log(ability.BAT);
+b2.sort((a,b) => b.Credits - a.Credits);
 b2.forEach(i => console.log(i.Name));
 let b3 = b.filter(i => i.Skill === ability.ALL);
 console.log(ability.ALL);
+b3.sort((a,b) => b.Credits - a.Credits);
 b3.forEach(i => console.log(i.Name));
 let b4 = b.filter(i => i.Skill === ability.BOW);
 console.log(ability.BOW);
+b4.sort((a,b) => b.Credits - a.Credits);
 b4.forEach(i => console.log(i.Name));
 
 console.log('');
@@ -106,5 +110,5 @@ n= b[j1];
 console.log(n.Name);
 }
 
-selectTeam(a,2,4);
+selectTeam(a);
 
