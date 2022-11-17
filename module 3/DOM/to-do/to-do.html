@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Do List</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link rel="stylesheet" href="to-do.css">
+    <script src="to-do.js"></script>
+</head>
+<body>
+    <div class="container">
+        <form action="" onsubmit="submitItem(); return false;">
+            <h6>Add Task</h6>
+            <hr>
+            <br>
+            <input id="itemName" type="text" class="form-control mb-3">
+            <button class="btn btn-primary mb-3" type="submit">Add</button>
+        </form>
+
+        <h6>To Do List</h6>
+        <hr>
+        <ul id="itemList">
+        </ul>
+    </div>
+</body>
+</html>
