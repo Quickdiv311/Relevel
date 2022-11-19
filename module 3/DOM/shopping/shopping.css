@@ -1,0 +1,16 @@
+.container
+{
+    padding-top: 20px;
+}
+
+.input-form
+{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.inp
+{
+    display: inline;
+    width: 80%;
+}
