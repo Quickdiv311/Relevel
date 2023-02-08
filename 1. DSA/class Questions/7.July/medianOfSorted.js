@@ -5,6 +5,19 @@ function medianOftwoSortedArrays(a, b) {
         // a is grater than b, do binary search on B as it is smaller
         return medianOftwoSortedArrays(b, a);
     }
+
+    if(m==0)
+    {
+      if(n%2==0)
+      {
+        return (b[Math.floor(n/2)] + b[Math.floor((n-1)/2)])/2;
+      }
+      else
+      {
+        return b[Math.floor(n/2)];
+      }
+    }
+
     let lo = 0, hi = m;
     while(lo <= hi) {
         let partitionA = lo + Math.floor((hi - lo) / 2); // mid point in search space of array a
@@ -31,7 +44,7 @@ function medianOftwoSortedArrays(a, b) {
         }
  
         if(partitionB == n) {
-            minRightB == Infinity;
+            minRightB = Infinity;
         } else {
             minRightB = b[partitionB];
         }
@@ -55,4 +68,4 @@ function medianOftwoSortedArrays(a, b) {
     return -1;
  }
  
- console.log(medianOftwoSortedArrays([1,2], [3,4]));
+ console.log(medianOftwoSortedArrays([3], [-2,-1]));
