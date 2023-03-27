@@ -86,7 +86,6 @@ class Queue
 
 let que = new Queue();
 
-// console.log(que.getFront());
 
 function generaterBinary(n)
 {

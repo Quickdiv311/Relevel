@@ -56,14 +56,16 @@ class LinkedList
             return;
         }
 
-       let temp = this.head;
-       
-       while(tail.next.next!=null)
-       {
-         tail = tail.next;
-       }
-
-       temp.next = null;
+        let temp = this.head;
+        let tail = this.head;
+  
+        while(tail.next)
+        {
+            temp = tail;
+            tail = tail.next;
+        }
+  
+        temp.next = null;
     }
 
     addAt(pos,d)
@@ -121,6 +123,24 @@ class LinkedList
      this.head = prev;
     }
 
+    first()
+    {
+        return this.head.data;
+    }
+
+    last()
+    {
+        if(this.head == null) return;
+         let start = this.head;
+
+         while(start.next)
+         {
+             start = start.next;
+         }
+         
+         return start.data;
+    }
+
     display()
     {
         let temp = this.head;
@@ -136,7 +156,8 @@ class LinkedList
 }
 
 let ll = new LinkedList();
-ll.addAtHead(3);
 ll.addAtTail(2);
-ll.addAtTail(1);
+ll.addAtTail(2);
+ll.addAtTail(2);
+ll.removeAtTail();
 ll.display();
