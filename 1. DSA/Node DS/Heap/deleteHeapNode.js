@@ -3,6 +3,11 @@ class Heap
   constructor(a)
   {
    this.arr = a;
+
+   for(let i=this.arr.length-1;i>=0;i--)
+   {
+    this.downheapify(i);
+   }
   }
 
   upheapify(ind)
@@ -24,9 +29,8 @@ class Heap
     }
   }
 
-  downheapify()
+  downheapify(i)
   {
-     let i = 0;
 
      while((2*i)+1 < this.arr.length)
      {
@@ -58,7 +62,7 @@ class Heap
      this.upheapify(i);
      this.arr[0] = this.arr[this.arr.length-1];
      this.arr.pop();
-     this.downheapify();
+     this.downheapify(0);
   }
 }
 
